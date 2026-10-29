@@ -1,0 +1,36 @@
+[build-system]
+requires = ["setuptools>=77", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "crawlora-reelshort"
+version = "0.1.0"
+description = "Crawlora ReelShort API client with 11 endpoints for title discovery, search, movie details, new releases, and public Fandom articles"
+readme = "README.md"
+keywords = ["crawlora", "api-client", "sdk", "web-scraping", "scraping-api", "reelshort", "reelshort-api", "reelshort-scraper", "reelshort-data", "reelshort-title-discovery", "reelshort-search", "reelshort-movie-details", "reelshort-new-releases", "reelshort-public-fandom-articles"]
+requires-python = ">=3.10"
+license = "MIT"
+license-files = ["LICENSE"]
+authors = [{ name = "Crawlora" }]
+classifiers = [
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3.10",
+  "Typing :: Typed",
+]
+dependencies = ["typing-extensions>=4.7; python_version < '3.11'"]
+
+[project.optional-dependencies]
+async = ["httpx>=0.27"]
+test = ["mypy>=1.11", "pytest>=8"]
+
+[project.urls]
+Homepage = "https://crawlora.net/?utm_source=pypi&utm_medium=referral&utm_campaign=platform-clients&utm_content=reelshort-python-homepage"
+Documentation = "https://crawlora.net/docs?utm_source=pypi&utm_medium=referral&utm_campaign=platform-clients&utm_content=reelshort-python-api-docs"
+Repository = "https://github.com/Crawlora-org/crawlora-reelshort"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["crawlora_reelshort"]
+
+[tool.setuptools.package-data]
+"crawlora_reelshort" = ["py.typed", "*.pyi"]

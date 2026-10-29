@@ -1,0 +1,786 @@
+{
+  "platform": "reelshort",
+  "operationCount": 11,
+  "operationIds": [
+    "reelshort-fandom-categories",
+    "reelshort-fandom-post",
+    "reelshort-fandom-posts",
+    "reelshort-home",
+    "reelshort-movie",
+    "reelshort-new-releases",
+    "reelshort-search",
+    "reelshort-shelf",
+    "reelshort-tag-books",
+    "reelshort-tag-search",
+    "reelshort-tags"
+  ],
+  "methods": {
+    "fandom_categories": "reelshort-fandom-categories",
+    "fandom_post": "reelshort-fandom-post",
+    "fandom_posts": "reelshort-fandom-posts",
+    "home": "reelshort-home",
+    "movie": "reelshort-movie",
+    "new_releases": "reelshort-new-releases",
+    "search": "reelshort-search",
+    "shelf": "reelshort-shelf",
+    "tag_books": "reelshort-tag-books",
+    "tag_search": "reelshort-tag-search",
+    "tags": "reelshort-tags"
+  },
+  "operations": {
+    "reelshort-fandom-categories": {
+      "id": "reelshort-fandom-categories",
+      "method": "GET",
+      "path": "/reelshort/fandom-categories",
+      "pathParams": [],
+      "queryParams": [],
+      "bodyParam": null,
+      "bodyRequired": false,
+      "params": [],
+      "produces": [
+        "application/json"
+      ],
+      "security": [
+        "ApiKeyAuth"
+      ]
+    },
+    "reelshort-fandom-post": {
+      "id": "reelshort-fandom-post",
+      "method": "GET",
+      "path": "/reelshort/fandom-post",
+      "pathParams": [],
+      "queryParams": [
+        {
+          "name": "id",
+          "in": "query",
+          "type": "string",
+          "required": true
+        }
+      ],
+      "bodyParam": null,
+      "bodyRequired": false,
+      "params": [
+        {
+          "description": "Article id (digits), article slug, or a reelshort.com/fandom URL",
+          "in": "query",
+          "name": "id",
+          "required": true,
+          "type": "string",
+          "x-example": "54181"
+        }
+      ],
+      "produces": [
+        "application/json"
+      ],
+      "security": [
+        "ApiKeyAuth"
+      ]
+    },
+    "reelshort-fandom-posts": {
+      "id": "reelshort-fandom-posts",
+      "method": "GET",
+      "path": "/reelshort/fandom-posts",
+      "pathParams": [],
+      "queryParams": [
+        {
+          "name": "search",
+          "in": "query",
+          "type": "string"
+        },
+        {
+          "name": "category",
+          "in": "query",
+          "type": "string",
+          "enum": [
+            "general-topic",
+            "movie-cast-list",
+            "top-movie-stories",
+            "where-to-watch",
+            "where-to-watch-2"
+          ]
+        },
+        {
+          "name": "page",
+          "in": "query",
+          "type": "integer"
+        },
+        {
+          "name": "limit",
+          "in": "query",
+          "type": "integer"
+        }
+      ],
+      "bodyParam": null,
+      "bodyRequired": false,
+      "params": [
+        {
+          "description": "Text to search articles for, up to 100 characters",
+          "in": "query",
+          "name": "search",
+          "type": "string",
+          "x-example": "alpha"
+        },
+        {
+          "description": "Category slug: general-topic, movie-cast-list, top-movie-stories, where-to-watch or where-to-watch-2",
+          "enum": [
+            "general-topic",
+            "movie-cast-list",
+            "top-movie-stories",
+            "where-to-watch",
+            "where-to-watch-2"
+          ],
+          "in": "query",
+          "name": "category",
+          "type": "string",
+          "x-example": "movie-cast-list"
+        },
+        {
+          "description": "Page number, 1 to 10000; defaults to 1",
+          "in": "query",
+          "name": "page",
+          "type": "integer",
+          "x-example": 2
+        },
+        {
+          "description": "Page size, 1 to 100; defaults to 10",
+          "in": "query",
+          "name": "limit",
+          "type": "integer",
+          "x-example": 10
+        }
+      ],
+      "produces": [
+        "application/json"
+      ],
+      "security": [
+        "ApiKeyAuth"
+      ]
+    },
+    "reelshort-home": {
+      "id": "reelshort-home",
+      "method": "GET",
+      "path": "/reelshort/home",
+      "pathParams": [],
+      "queryParams": [
+        {
+          "name": "language",
+          "in": "query",
+          "type": "string",
+          "enum": [
+            "en",
+            "es",
+            "pt",
+            "fr",
+            "de",
+            "it",
+            "ja",
+            "ko",
+            "th",
+            "id",
+            "tr",
+            "ar",
+            "ru",
+            "pl",
+            "ro",
+            "cs",
+            "bg",
+            "vi",
+            "zh-TW"
+          ]
+        }
+      ],
+      "bodyParam": null,
+      "bodyRequired": false,
+      "params": [
+        {
+          "description": "Site locale, one of: en, es, pt, fr, de, it, ja, ko, th, id, tr, ar, ru, pl, ro, cs, bg, vi, zh-TW; defaults to en. Titles and tags are translated",
+          "enum": [
+            "en",
+            "es",
+            "pt",
+            "fr",
+            "de",
+            "it",
+            "ja",
+            "ko",
+            "th",
+            "id",
+            "tr",
+            "ar",
+            "ru",
+            "pl",
+            "ro",
+            "cs",
+            "bg",
+            "vi",
+            "zh-TW"
+          ],
+          "in": "query",
+          "name": "language",
+          "type": "string",
+          "x-example": "es"
+        }
+      ],
+      "produces": [
+        "application/json"
+      ],
+      "security": [
+        "ApiKeyAuth"
+      ]
+    },
+    "reelshort-movie": {
+      "id": "reelshort-movie",
+      "method": "GET",
+      "path": "/reelshort/movie",
+      "pathParams": [],
+      "queryParams": [
+        {
+          "name": "id",
+          "in": "query",
+          "type": "string",
+          "required": true
+        }
+      ],
+      "bodyParam": null,
+      "bodyRequired": false,
+      "params": [
+        {
+          "description": "Title id (24 hex characters) from reelshort-home, reelshort-shelf or reelshort-search, or a reelshort.com movie or episode URL",
+          "in": "query",
+          "name": "id",
+          "required": true,
+          "type": "string",
+          "x-example": "6a8752ac7c23cb02b40f062b"
+        }
+      ],
+      "produces": [
+        "application/json"
+      ],
+      "security": [
+        "ApiKeyAuth"
+      ]
+    },
+    "reelshort-new-releases": {
+      "id": "reelshort-new-releases",
+      "method": "GET",
+      "path": "/reelshort/new-releases",
+      "pathParams": [],
+      "queryParams": [
+        {
+          "name": "book_id",
+          "in": "query",
+          "type": "string",
+          "required": true
+        },
+        {
+          "name": "language",
+          "in": "query",
+          "type": "string",
+          "enum": [
+            "en",
+            "es",
+            "pt",
+            "fr",
+            "de",
+            "it",
+            "ja",
+            "ko",
+            "th",
+            "id",
+            "tr",
+            "ar",
+            "ru",
+            "pl",
+            "ro",
+            "cs",
+            "bg",
+            "vi",
+            "zh-TW"
+          ]
+        }
+      ],
+      "bodyParam": null,
+      "bodyRequired": false,
+      "params": [
+        {
+          "description": "A 24-character title id, from reelshort-movie, reelshort-shelf or reelshort-home; required by ReelShort but not observed to change the result",
+          "in": "query",
+          "name": "book_id",
+          "required": true,
+          "type": "string",
+          "x-example": "6aac85383511c0b6df0eec87"
+        },
+        {
+          "description": "Site language, one of en, es, pt, fr, de, it, ja, ko, th, id, tr, ar, ru, pl, ro, cs, bg, vi, zh-TW; defaults to en",
+          "enum": [
+            "en",
+            "es",
+            "pt",
+            "fr",
+            "de",
+            "it",
+            "ja",
+            "ko",
+            "th",
+            "id",
+            "tr",
+            "ar",
+            "ru",
+            "pl",
+            "ro",
+            "cs",
+            "bg",
+            "vi",
+            "zh-TW"
+          ],
+          "in": "query",
+          "name": "language",
+          "type": "string",
+          "x-example": "en"
+        }
+      ],
+      "produces": [
+        "application/json"
+      ],
+      "security": [
+        "ApiKeyAuth"
+      ]
+    },
+    "reelshort-search": {
+      "id": "reelshort-search",
+      "method": "GET",
+      "path": "/reelshort/search",
+      "pathParams": [],
+      "queryParams": [
+        {
+          "name": "keywords",
+          "in": "query",
+          "type": "string",
+          "required": true
+        },
+        {
+          "name": "page",
+          "in": "query",
+          "type": "integer"
+        },
+        {
+          "name": "language",
+          "in": "query",
+          "type": "string",
+          "enum": [
+            "en",
+            "es",
+            "pt",
+            "fr",
+            "de",
+            "it",
+            "ja",
+            "ko",
+            "th",
+            "id",
+            "tr",
+            "ar",
+            "ru",
+            "pl",
+            "ro",
+            "cs",
+            "bg",
+            "vi",
+            "zh-TW"
+          ]
+        }
+      ],
+      "bodyParam": null,
+      "bodyRequired": false,
+      "params": [
+        {
+          "description": "Title text to search for, up to 100 characters",
+          "in": "query",
+          "name": "keywords",
+          "required": true,
+          "type": "string",
+          "x-example": "billionaire"
+        },
+        {
+          "description": "Page number, 1 to 200; defaults to 1. Each page holds 12 titles",
+          "in": "query",
+          "name": "page",
+          "type": "integer",
+          "x-example": 2
+        },
+        {
+          "description": "Site locale, one of: en, es, pt, fr, de, it, ja, ko, th, id, tr, ar, ru, pl, ro, cs, bg, vi, zh-TW; defaults to en. Titles and tags are translated",
+          "enum": [
+            "en",
+            "es",
+            "pt",
+            "fr",
+            "de",
+            "it",
+            "ja",
+            "ko",
+            "th",
+            "id",
+            "tr",
+            "ar",
+            "ru",
+            "pl",
+            "ro",
+            "cs",
+            "bg",
+            "vi",
+            "zh-TW"
+          ],
+          "in": "query",
+          "name": "language",
+          "type": "string",
+          "x-example": "es"
+        }
+      ],
+      "produces": [
+        "application/json"
+      ],
+      "security": [
+        "ApiKeyAuth"
+      ]
+    },
+    "reelshort-shelf": {
+      "id": "reelshort-shelf",
+      "method": "GET",
+      "path": "/reelshort/shelf",
+      "pathParams": [],
+      "queryParams": [
+        {
+          "name": "id",
+          "in": "query",
+          "type": "string",
+          "required": true
+        }
+      ],
+      "bodyParam": null,
+      "bodyRequired": false,
+      "params": [
+        {
+          "description": "Shelf id from reelshort-home (for example 51003506), or a reelshort.com shelf URL",
+          "in": "query",
+          "name": "id",
+          "required": true,
+          "type": "string",
+          "x-example": "51003506"
+        }
+      ],
+      "produces": [
+        "application/json"
+      ],
+      "security": [
+        "ApiKeyAuth"
+      ]
+    },
+    "reelshort-tag-books": {
+      "id": "reelshort-tag-books",
+      "method": "GET",
+      "path": "/reelshort/tag-books",
+      "pathParams": [],
+      "queryParams": [
+        {
+          "name": "tag_id",
+          "in": "query",
+          "type": "string",
+          "required": true
+        },
+        {
+          "name": "page",
+          "in": "query",
+          "type": "integer"
+        },
+        {
+          "name": "limit",
+          "in": "query",
+          "type": "integer"
+        },
+        {
+          "name": "language",
+          "in": "query",
+          "type": "string",
+          "enum": [
+            "en",
+            "es",
+            "pt",
+            "fr",
+            "de",
+            "it",
+            "ja",
+            "ko",
+            "th",
+            "id",
+            "tr",
+            "ar",
+            "ru",
+            "pl",
+            "ro",
+            "cs",
+            "bg",
+            "vi",
+            "zh-TW"
+          ]
+        }
+      ],
+      "bodyParam": null,
+      "bodyRequired": false,
+      "params": [
+        {
+          "description": "Tag id, 24 lowercase hex characters, from reelshort-tags, reelshort-tag-search or reelshort-movie",
+          "in": "query",
+          "name": "tag_id",
+          "required": true,
+          "type": "string",
+          "x-example": "676d210e4582b53a14081aab"
+        },
+        {
+          "description": "Page number, 1 to 10000; defaults to 1",
+          "in": "query",
+          "name": "page",
+          "type": "integer",
+          "x-example": 1
+        },
+        {
+          "description": "Page size, 1 to 100; defaults to 20",
+          "in": "query",
+          "name": "limit",
+          "type": "integer",
+          "x-example": 20
+        },
+        {
+          "description": "Site language, one of en, es, pt, fr, de, it, ja, ko, th, id, tr, ar, ru, pl, ro, cs, bg, vi, zh-TW; defaults to en",
+          "enum": [
+            "en",
+            "es",
+            "pt",
+            "fr",
+            "de",
+            "it",
+            "ja",
+            "ko",
+            "th",
+            "id",
+            "tr",
+            "ar",
+            "ru",
+            "pl",
+            "ro",
+            "cs",
+            "bg",
+            "vi",
+            "zh-TW"
+          ],
+          "in": "query",
+          "name": "language",
+          "type": "string",
+          "x-example": "en"
+        }
+      ],
+      "produces": [
+        "application/json"
+      ],
+      "security": [
+        "ApiKeyAuth"
+      ]
+    },
+    "reelshort-tag-search": {
+      "id": "reelshort-tag-search",
+      "method": "GET",
+      "path": "/reelshort/tag-search",
+      "pathParams": [],
+      "queryParams": [
+        {
+          "name": "word",
+          "in": "query",
+          "type": "string",
+          "required": true
+        },
+        {
+          "name": "page",
+          "in": "query",
+          "type": "integer"
+        },
+        {
+          "name": "language",
+          "in": "query",
+          "type": "string",
+          "enum": [
+            "en",
+            "es",
+            "pt",
+            "fr",
+            "de",
+            "it",
+            "ja",
+            "ko",
+            "th",
+            "id",
+            "tr",
+            "ar",
+            "ru",
+            "pl",
+            "ro",
+            "cs",
+            "bg",
+            "vi",
+            "zh-TW"
+          ]
+        }
+      ],
+      "bodyParam": null,
+      "bodyRequired": false,
+      "params": [
+        {
+          "description": "Tag text to search for, up to 100 characters",
+          "in": "query",
+          "name": "word",
+          "required": true,
+          "type": "string",
+          "x-example": "Billionaire"
+        },
+        {
+          "description": "Page number, 1 to 10000; defaults to 1",
+          "in": "query",
+          "name": "page",
+          "type": "integer",
+          "x-example": 1
+        },
+        {
+          "description": "Site language, one of en, es, pt, fr, de, it, ja, ko, th, id, tr, ar, ru, pl, ro, cs, bg, vi, zh-TW; defaults to en",
+          "enum": [
+            "en",
+            "es",
+            "pt",
+            "fr",
+            "de",
+            "it",
+            "ja",
+            "ko",
+            "th",
+            "id",
+            "tr",
+            "ar",
+            "ru",
+            "pl",
+            "ro",
+            "cs",
+            "bg",
+            "vi",
+            "zh-TW"
+          ],
+          "in": "query",
+          "name": "language",
+          "type": "string",
+          "x-example": "en"
+        }
+      ],
+      "produces": [
+        "application/json"
+      ],
+      "security": [
+        "ApiKeyAuth"
+      ]
+    },
+    "reelshort-tags": {
+      "id": "reelshort-tags",
+      "method": "GET",
+      "path": "/reelshort/tags",
+      "pathParams": [],
+      "queryParams": [
+        {
+          "name": "category",
+          "in": "query",
+          "type": "string",
+          "required": true,
+          "enum": [
+            "actor",
+            "actress",
+            "identity",
+            "trope"
+          ]
+        },
+        {
+          "name": "language",
+          "in": "query",
+          "type": "string",
+          "enum": [
+            "en",
+            "es",
+            "pt",
+            "fr",
+            "de",
+            "it",
+            "ja",
+            "ko",
+            "th",
+            "id",
+            "tr",
+            "ar",
+            "ru",
+            "pl",
+            "ro",
+            "cs",
+            "bg",
+            "vi",
+            "zh-TW"
+          ]
+        }
+      ],
+      "bodyParam": null,
+      "bodyRequired": false,
+      "params": [
+        {
+          "description": "Tag category: actor, actress, identity or trope",
+          "enum": [
+            "actor",
+            "actress",
+            "identity",
+            "trope"
+          ],
+          "in": "query",
+          "name": "category",
+          "required": true,
+          "type": "string",
+          "x-example": "identity"
+        },
+        {
+          "description": "Site language, one of en, es, pt, fr, de, it, ja, ko, th, id, tr, ar, ru, pl, ro, cs, bg, vi, zh-TW; defaults to en",
+          "enum": [
+            "en",
+            "es",
+            "pt",
+            "fr",
+            "de",
+            "it",
+            "ja",
+            "ko",
+            "th",
+            "id",
+            "tr",
+            "ar",
+            "ru",
+            "pl",
+            "ro",
+            "cs",
+            "bg",
+            "vi",
+            "zh-TW"
+          ],
+          "in": "query",
+          "name": "language",
+          "type": "string",
+          "x-example": "en"
+        }
+      ],
+      "produces": [
+        "application/json"
+      ],
+      "security": [
+        "ApiKeyAuth"
+      ]
+    }
+  }
+}

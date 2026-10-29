@@ -1,0 +1,45 @@
+{
+  "name": "crawlora/reelshort",
+  "description": "Crawlora ReelShort API client with 11 endpoints for title discovery, search, movie details, new releases, and public Fandom articles",
+  "keywords": [
+    "crawlora",
+    "api-client",
+    "sdk",
+    "web-scraping",
+    "scraping-api",
+    "reelshort",
+    "reelshort-api",
+    "reelshort-scraper",
+    "reelshort-data",
+    "reelshort-title-discovery",
+    "reelshort-search",
+    "reelshort-movie-details",
+    "reelshort-new-releases",
+    "reelshort-public-fandom-articles"
+  ],
+  "type": "library",
+  "license": "MIT",
+  "require": {
+    "php": ">=8.1",
+    "ext-curl": "*",
+    "ext-json": "*"
+  },
+  "autoload": {
+    "psr-4": {
+      "Crawlora\\Reelshort\\": "php/src/Crawlora/Reelshort/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "Crawlora\\Reelshort\\Tests\\": "php/tests/"
+    }
+  },
+  "scripts": {
+    "test": "php php/tests/client_test.php"
+  },
+  "homepage": "https://crawlora.net/?utm_source=packagist&utm_medium=referral&utm_campaign=platform-clients&utm_content=reelshort-php-homepage",
+  "support": {
+    "source": "https://github.com/Crawlora-org/crawlora-reelshort",
+    "docs": "https://crawlora.net/docs?utm_source=packagist&utm_medium=referral&utm_campaign=platform-clients&utm_content=reelshort-php-api-docs"
+  }
+}

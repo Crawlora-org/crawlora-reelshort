@@ -1,0 +1,1655 @@
+{
+  "basePath": "/api/v1",
+  "definitions": {
+    "app.Response": {
+      "description": "The Response struct is used for wrapping the API response with a code, message, and data.",
+      "properties": {
+        "code": {
+          "description": "Code is the HTTP status code or a custom code used to indicate the result of the request\n@example 200",
+          "type": "integer"
+        },
+        "data": {
+          "description": "Data is the response data (can be any object or null)\n@example {\"id\": 1, \"name\": \"John Doe\"}"
+        },
+        "msg": {
+          "description": "Msg is the message that describes the result of the request\n@example \"Request successful\""
+        }
+      },
+      "type": "object"
+    },
+    "reelshort.Actor": {
+      "properties": {
+        "imdb_url": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "photo_url": {
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "reelshort.Book": {
+      "properties": {
+        "cover_url": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "episodes": {
+          "type": "integer"
+        },
+        "favorites": {
+          "type": "integer"
+        },
+        "first_paid_episode": {
+          "description": "FirstPaidEpisode is the episode number from which episodes are paid; 0\nwhen ReelShort lists none.",
+          "type": "integer"
+        },
+        "has_trailer": {
+          "type": "boolean"
+        },
+        "id": {
+          "type": "string"
+        },
+        "language": {
+          "type": "string"
+        },
+        "plays": {
+          "description": "Plays and Favorites are ReelShort's own read_count and collect_count.",
+          "type": "integer"
+        },
+        "tags": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "title": {
+          "type": "string"
+        },
+        "url": {
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "reelshort.Episode": {
+      "properties": {
+        "free": {
+          "type": "boolean"
+        },
+        "id": {
+          "type": "string"
+        },
+        "kind": {
+          "description": "episode or trailer",
+          "type": "string"
+        },
+        "likes": {
+          "type": "integer"
+        },
+        "number": {
+          "description": "Number is the episode number; 0 is the trailer.",
+          "type": "integer"
+        },
+        "published_at": {
+          "type": "string"
+        },
+        "thumbnail_url": {
+          "type": "string"
+        },
+        "url": {
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "reelshort.FandomCategoriesResponse": {
+      "properties": {
+        "categories": {
+          "items": {
+            "$ref": "#/definitions/reelshort.FandomCategory"
+          },
+          "type": "array"
+        }
+      },
+      "type": "object"
+    },
+    "reelshort.FandomCategory": {
+      "properties": {
+        "description": {
+          "type": "string"
+        },
+        "id": {
+          "type": "integer"
+        },
+        "name": {
+          "type": "string"
+        },
+        "posts": {
+          "type": "integer"
+        },
+        "slug": {
+          "type": "string"
+        },
+        "url": {
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "reelshort.FandomPost": {
+      "properties": {
+        "categories": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "excerpt": {
+          "type": "string"
+        },
+        "id": {
+          "type": "integer"
+        },
+        "image_url": {
+          "type": "string"
+        },
+        "modified_at": {
+          "type": "string"
+        },
+        "published_at": {
+          "type": "string"
+        },
+        "slug": {
+          "type": "string"
+        },
+        "title": {
+          "type": "string"
+        },
+        "url": {
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "reelshort.FandomPostResponse": {
+      "properties": {
+        "categories": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "content": {
+          "description": "Content is the article body as plain text with paragraph breaks.",
+          "type": "string"
+        },
+        "excerpt": {
+          "type": "string"
+        },
+        "id": {
+          "type": "integer"
+        },
+        "image_url": {
+          "type": "string"
+        },
+        "modified_at": {
+          "type": "string"
+        },
+        "published_at": {
+          "type": "string"
+        },
+        "slug": {
+          "type": "string"
+        },
+        "title": {
+          "type": "string"
+        },
+        "title_ids": {
+          "description": "TitleIDs are the ReelShort title ids the article links to, in order of\nfirst appearance; pass them to reelshort-movie.",
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "url": {
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "reelshort.FandomPostsResponse": {
+      "properties": {
+        "category": {
+          "type": "string"
+        },
+        "limit": {
+          "type": "integer"
+        },
+        "page": {
+          "type": "integer"
+        },
+        "posts": {
+          "items": {
+            "$ref": "#/definitions/reelshort.FandomPost"
+          },
+          "type": "array"
+        },
+        "search": {
+          "type": "string"
+        },
+        "total": {
+          "type": "integer"
+        },
+        "total_pages": {
+          "type": "integer"
+        }
+      },
+      "type": "object"
+    },
+    "reelshort.HomeResponse": {
+      "properties": {
+        "language": {
+          "type": "string"
+        },
+        "shelves": {
+          "items": {
+            "$ref": "#/definitions/reelshort.Shelf"
+          },
+          "type": "array"
+        }
+      },
+      "type": "object"
+    },
+    "reelshort.MovieResponse": {
+      "properties": {
+        "actors": {
+          "items": {
+            "$ref": "#/definitions/reelshort.Actor"
+          },
+          "type": "array"
+        },
+        "ai_generated": {
+          "type": "boolean"
+        },
+        "badge": {
+          "type": "string"
+        },
+        "cover_url": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "dubbed": {
+          "type": "boolean"
+        },
+        "episode_count": {
+          "description": "EpisodeCount counts the numbered episodes; the trailer is not included\n(ReelShort's own total on its movie page does include it).",
+          "type": "integer"
+        },
+        "episodes": {
+          "items": {
+            "$ref": "#/definitions/reelshort.Episode"
+          },
+          "type": "array"
+        },
+        "favorites": {
+          "type": "integer"
+        },
+        "first_paid_episode": {
+          "type": "integer"
+        },
+        "id": {
+          "type": "string"
+        },
+        "imdb_url": {
+          "type": "string"
+        },
+        "language": {
+          "type": "string"
+        },
+        "online_at": {
+          "type": "string"
+        },
+        "original_language": {
+          "type": "string"
+        },
+        "plays": {
+          "type": "integer"
+        },
+        "published_at": {
+          "type": "string"
+        },
+        "tags": {
+          "items": {
+            "$ref": "#/definitions/reelshort.Tag"
+          },
+          "type": "array"
+        },
+        "title": {
+          "type": "string"
+        },
+        "update_status": {
+          "description": "UpdateStatus is ReelShort's raw update_status flag (1 on every title\nsampled on 2026-10-26); it is not interpreted.",
+          "type": "integer"
+        },
+        "url": {
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "reelshort.NewReleasesResponse": {
+      "properties": {
+        "books": {
+          "items": {
+            "$ref": "#/definitions/reelshort.Book"
+          },
+          "type": "array"
+        },
+        "language": {
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "reelshort.RelatedTag": {
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "reelshort.SearchResponse": {
+      "properties": {
+        "books": {
+          "items": {
+            "$ref": "#/definitions/reelshort.Book"
+          },
+          "type": "array"
+        },
+        "keywords": {
+          "type": "string"
+        },
+        "language": {
+          "type": "string"
+        },
+        "page": {
+          "type": "integer"
+        },
+        "total": {
+          "description": "Total is approximate: ReelShort's search backend reports a count that\nvaries between calls for the same query.",
+          "type": "integer"
+        },
+        "total_pages": {
+          "type": "integer"
+        }
+      },
+      "type": "object"
+    },
+    "reelshort.Shelf": {
+      "properties": {
+        "books": {
+          "items": {
+            "$ref": "#/definitions/reelshort.Book"
+          },
+          "type": "array"
+        },
+        "id": {
+          "type": "integer"
+        },
+        "name": {
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "reelshort.ShelfResponse": {
+      "properties": {
+        "books": {
+          "items": {
+            "$ref": "#/definitions/reelshort.Book"
+          },
+          "type": "array"
+        },
+        "id": {
+          "type": "integer"
+        },
+        "name": {
+          "type": "string"
+        },
+        "total": {
+          "type": "integer"
+        }
+      },
+      "type": "object"
+    },
+    "reelshort.Tag": {
+      "properties": {
+        "category_id": {
+          "type": "string"
+        },
+        "id": {
+          "type": "string"
+        },
+        "kind": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "reelshort.TagBooksResponse": {
+      "properties": {
+        "books": {
+          "items": {
+            "$ref": "#/definitions/reelshort.Book"
+          },
+          "type": "array"
+        },
+        "description": {
+          "type": "string"
+        },
+        "limit": {
+          "type": "integer"
+        },
+        "page": {
+          "type": "integer"
+        },
+        "related_tags": {
+          "items": {
+            "$ref": "#/definitions/reelshort.RelatedTag"
+          },
+          "type": "array"
+        },
+        "tag": {
+          "$ref": "#/definitions/reelshort.Tag"
+        },
+        "top_titles": {
+          "items": {
+            "$ref": "#/definitions/reelshort.TitleRef"
+          },
+          "type": "array"
+        },
+        "total_items": {
+          "description": "TotalItems is ReelShort's total for the tag; paging can return fewer\ndistinct titles (a title can repeat across pages).",
+          "type": "integer"
+        }
+      },
+      "type": "object"
+    },
+    "reelshort.TagMatch": {
+      "properties": {
+        "category_id": {
+          "type": "integer"
+        },
+        "description": {
+          "type": "string"
+        },
+        "id": {
+          "type": "string"
+        },
+        "image_url": {
+          "type": "string"
+        },
+        "kind": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "titles": {
+          "description": "Titles is the number of titles ReelShort's search lists for the tag. It\nis approximate: reelshort-tag-books reports a different total for the\nsame tag.",
+          "type": "integer"
+        }
+      },
+      "type": "object"
+    },
+    "reelshort.TagSearchResponse": {
+      "properties": {
+        "language": {
+          "type": "string"
+        },
+        "page": {
+          "type": "integer"
+        },
+        "page_size": {
+          "type": "integer"
+        },
+        "tags": {
+          "items": {
+            "$ref": "#/definitions/reelshort.TagMatch"
+          },
+          "type": "array"
+        },
+        "total": {
+          "type": "integer"
+        },
+        "word": {
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "reelshort.TagsResponse": {
+      "properties": {
+        "category": {
+          "type": "string"
+        },
+        "category_id": {
+          "type": "integer"
+        },
+        "language": {
+          "type": "string"
+        },
+        "tags": {
+          "items": {
+            "$ref": "#/definitions/reelshort.Tag"
+          },
+          "type": "array"
+        }
+      },
+      "type": "object"
+    },
+    "reelshort.TitleRef": {
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "title": {
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "reelshort.fandomCategoriesResponseDoc": {
+      "properties": {
+        "code": {
+          "example": 200,
+          "type": "integer"
+        },
+        "data": {
+          "$ref": "#/definitions/reelshort.FandomCategoriesResponse"
+        },
+        "msg": {
+          "example": "OK",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "reelshort.fandomPostResponseDoc": {
+      "properties": {
+        "code": {
+          "example": 200,
+          "type": "integer"
+        },
+        "data": {
+          "$ref": "#/definitions/reelshort.FandomPostResponse"
+        },
+        "msg": {
+          "example": "OK",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "reelshort.fandomPostsResponseDoc": {
+      "properties": {
+        "code": {
+          "example": 200,
+          "type": "integer"
+        },
+        "data": {
+          "$ref": "#/definitions/reelshort.FandomPostsResponse"
+        },
+        "msg": {
+          "example": "OK",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "reelshort.homeResponseDoc": {
+      "properties": {
+        "code": {
+          "example": 200,
+          "type": "integer"
+        },
+        "data": {
+          "$ref": "#/definitions/reelshort.HomeResponse"
+        },
+        "msg": {
+          "example": "OK",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "reelshort.movieResponseDoc": {
+      "properties": {
+        "code": {
+          "example": 200,
+          "type": "integer"
+        },
+        "data": {
+          "$ref": "#/definitions/reelshort.MovieResponse"
+        },
+        "msg": {
+          "example": "OK",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "reelshort.newReleasesResponseDoc": {
+      "properties": {
+        "code": {
+          "example": 200,
+          "type": "integer"
+        },
+        "data": {
+          "$ref": "#/definitions/reelshort.NewReleasesResponse"
+        },
+        "msg": {
+          "example": "OK",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "reelshort.searchResponseDoc": {
+      "properties": {
+        "code": {
+          "example": 200,
+          "type": "integer"
+        },
+        "data": {
+          "$ref": "#/definitions/reelshort.SearchResponse"
+        },
+        "msg": {
+          "example": "OK",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "reelshort.shelfResponseDoc": {
+      "properties": {
+        "code": {
+          "example": 200,
+          "type": "integer"
+        },
+        "data": {
+          "$ref": "#/definitions/reelshort.ShelfResponse"
+        },
+        "msg": {
+          "example": "OK",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "reelshort.tagBooksResponseDoc": {
+      "properties": {
+        "code": {
+          "example": 200,
+          "type": "integer"
+        },
+        "data": {
+          "$ref": "#/definitions/reelshort.TagBooksResponse"
+        },
+        "msg": {
+          "example": "OK",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "reelshort.tagSearchResponseDoc": {
+      "properties": {
+        "code": {
+          "example": 200,
+          "type": "integer"
+        },
+        "data": {
+          "$ref": "#/definitions/reelshort.TagSearchResponse"
+        },
+        "msg": {
+          "example": "OK",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "reelshort.tagsResponseDoc": {
+      "properties": {
+        "code": {
+          "example": 200,
+          "type": "integer"
+        },
+        "data": {
+          "$ref": "#/definitions/reelshort.TagsResponse"
+        },
+        "msg": {
+          "example": "OK",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "host": "api.crawlora.net",
+  "info": {
+    "contact": {
+      "email": "support@crawlora.net",
+      "name": "API Support",
+      "url": "https://crawlora.net"
+    },
+    "description": "Crawlora is a hosted web-data and SERP API: call documented REST endpoints and get normalized JSON instead of HTML to parse — across search/SERP, maps and local, e-commerce, app stores, social, media and finance. One API key; Crawlora runs the proxy rotation, headless browsers and parsing behind the scenes. Billed pay-on-success: charged only on a successful 2xx response, 1-10 credits per call, with a free tier of 2,000 credits per month and no card. A hosted MCP server (mcp.crawlora.net/mcp) exposes the same catalog as agent tools. Search endpoints accept `q` as a universal alias for whichever search-term parameter they document (`query`, `term`, `keyword`, or Amazon's `k`), so one parameter name works across the whole catalog; an explicitly supplied documented name always wins.",
+    "license": {
+      "name": "Crawlora Terms of Service",
+      "url": "https://crawlora.net/terms"
+    },
+    "termsOfService": "https://crawlora.net/terms",
+    "title": "Crawlora API",
+    "version": "1.2",
+    "x-logo": {
+      "altText": "Crawlora",
+      "backgroundColor": "#FFFFFF",
+      "url": "https://raw.githubusercontent.com/Crawlora-org/crawlora-mcp/main/assets/logo-400x400.png"
+    }
+  },
+  "paths": {
+    "/reelshort/fandom-categories": {
+      "get": {
+        "consumes": [
+          "application/json"
+        ],
+        "description": "Returns the categories of ReelShort's (reelshort.com) editorial site, Fandom (cast profiles, plot write-ups, streaming guides): id, slug, name, description, number of articles and link, read live from ReelShort. Pass a category slug to reelshort-fandom-posts. Only public editorial text is read.",
+        "operationId": "reelshort-fandom-categories",
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/reelshort.fandomCategoriesResponseDoc"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/app.Response"
+            }
+          },
+          "429": {
+            "description": "Too Many Requests",
+            "schema": {
+              "$ref": "#/definitions/app.Response"
+            }
+          },
+          "503": {
+            "description": "Service Unavailable",
+            "schema": {
+              "$ref": "#/definitions/app.Response"
+            }
+          }
+        },
+        "security": [
+          {
+            "ApiKeyAuth": []
+          }
+        ],
+        "summary": "List ReelShort Fandom's article categories",
+        "tags": [
+          "reelshort"
+        ]
+      }
+    },
+    "/reelshort/fandom-post": {
+      "get": {
+        "consumes": [
+          "application/json"
+        ],
+        "description": "Returns one article from ReelShort's (reelshort.com) editorial site, Fandom: title, excerpt, link, image, publish and modify times, category names, the full article text as plain text, and the ids of the ReelShort titles it links to (pass them to reelshort-movie). id is the article id, its slug, or its reelshort.com/fandom URL. Only public editorial text is read. An unknown article returns not found.",
+        "operationId": "reelshort-fandom-post",
+        "parameters": [
+          {
+            "description": "Article id (digits), article slug, or a reelshort.com/fandom URL",
+            "in": "query",
+            "name": "id",
+            "required": true,
+            "type": "string",
+            "x-example": "54181"
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/reelshort.fandomPostResponseDoc"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/app.Response"
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "$ref": "#/definitions/app.Response"
+            }
+          },
+          "429": {
+            "description": "Too Many Requests",
+            "schema": {
+              "$ref": "#/definitions/app.Response"
+            }
+          },
+          "503": {
+            "description": "Service Unavailable",
+            "schema": {
+              "$ref": "#/definitions/app.Response"
+            }
+          }
+        },
+        "security": [
+          {
+            "ApiKeyAuth": []
+          }
+        ],
+        "summary": "Get a ReelShort Fandom article",
+        "tags": [
+          "reelshort"
+        ]
+      }
+    },
+    "/reelshort/fandom-posts": {
+      "get": {
+        "consumes": [
+          "application/json"
+        ],
+        "description": "Lists articles from ReelShort's (reelshort.com) editorial site, Fandom, newest first: id, slug, title, excerpt, link, image, publish and modify times and category names, with the total and page count. Filter by search text and by category slug (general-topic, movie-cast-list, top-movie-stories, where-to-watch or where-to-watch-2). Pass an article id to reelshort-fandom-post for its text. Only public editorial text is read.",
+        "operationId": "reelshort-fandom-posts",
+        "parameters": [
+          {
+            "description": "Text to search articles for, up to 100 characters",
+            "in": "query",
+            "name": "search",
+            "type": "string",
+            "x-example": "alpha"
+          },
+          {
+            "description": "Category slug: general-topic, movie-cast-list, top-movie-stories, where-to-watch or where-to-watch-2",
+            "enum": [
+              "general-topic",
+              "movie-cast-list",
+              "top-movie-stories",
+              "where-to-watch",
+              "where-to-watch-2"
+            ],
+            "in": "query",
+            "name": "category",
+            "type": "string",
+            "x-example": "movie-cast-list"
+          },
+          {
+            "description": "Page number, 1 to 10000; defaults to 1",
+            "in": "query",
+            "name": "page",
+            "type": "integer",
+            "x-example": 2
+          },
+          {
+            "description": "Page size, 1 to 100; defaults to 10",
+            "in": "query",
+            "name": "limit",
+            "type": "integer",
+            "x-example": 10
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/reelshort.fandomPostsResponseDoc"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/app.Response"
+            }
+          },
+          "429": {
+            "description": "Too Many Requests",
+            "schema": {
+              "$ref": "#/definitions/app.Response"
+            }
+          },
+          "503": {
+            "description": "Service Unavailable",
+            "schema": {
+              "$ref": "#/definitions/app.Response"
+            }
+          }
+        },
+        "security": [
+          {
+            "ApiKeyAuth": []
+          }
+        ],
+        "summary": "List ReelShort Fandom articles",
+        "tags": [
+          "reelshort"
+        ]
+      }
+    },
+    "/reelshort/home": {
+      "get": {
+        "consumes": [
+          "application/json"
+        ],
+        "description": "Returns ReelShort's (reelshort.com) home page as ranked shelves of short dramas (New Release, TOP, Reel Original, Hidden Identity, and so on): shelf id and name, and for each title its id, title, description, cover, ReelShort link, episode count, tags, plays, favorites and the episode from which viewing is paid. Pass a shelf id to reelshort-shelf for the whole list. Only public catalog metadata is read; no playable video is returned.",
+        "operationId": "reelshort-home",
+        "parameters": [
+          {
+            "description": "Site locale, one of: en, es, pt, fr, de, it, ja, ko, th, id, tr, ar, ru, pl, ro, cs, bg, vi, zh-TW; defaults to en. Titles and tags are translated",
+            "enum": [
+              "en",
+              "es",
+              "pt",
+              "fr",
+              "de",
+              "it",
+              "ja",
+              "ko",
+              "th",
+              "id",
+              "tr",
+              "ar",
+              "ru",
+              "pl",
+              "ro",
+              "cs",
+              "bg",
+              "vi",
+              "zh-TW"
+            ],
+            "in": "query",
+            "name": "language",
+            "type": "string",
+            "x-example": "es"
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/reelshort.homeResponseDoc"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/app.Response"
+            }
+          },
+          "429": {
+            "description": "Too Many Requests",
+            "schema": {
+              "$ref": "#/definitions/app.Response"
+            }
+          },
+          "503": {
+            "description": "Service Unavailable",
+            "schema": {
+              "$ref": "#/definitions/app.Response"
+            }
+          }
+        },
+        "security": [
+          {
+            "ApiKeyAuth": []
+          }
+        ],
+        "summary": "List ReelShort's home page shelves",
+        "tags": [
+          "reelshort"
+        ]
+      }
+    },
+    "/reelshort/movie": {
+      "get": {
+        "consumes": [
+          "application/json"
+        ],
+        "description": "Returns one ReelShort short drama: title, description, cover, link, language, episode count, plays, favorites, badge, dubbed and AI-generated flags, release times, tags with their kind (genre, style, mood, trope and more), cast with IMDb links, and the full episode list with each episode's id, number, link, likes, release time and whether it is free. Only public catalog metadata is read; no playable video is returned.",
+        "operationId": "reelshort-movie",
+        "parameters": [
+          {
+            "description": "Title id (24 hex characters) from reelshort-home, reelshort-shelf or reelshort-search, or a reelshort.com movie or episode URL",
+            "in": "query",
+            "name": "id",
+            "required": true,
+            "type": "string",
+            "x-example": "6a8752ac7c23cb02b40f062b"
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/reelshort.movieResponseDoc"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/app.Response"
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "$ref": "#/definitions/app.Response"
+            }
+          },
+          "429": {
+            "description": "Too Many Requests",
+            "schema": {
+              "$ref": "#/definitions/app.Response"
+            }
+          },
+          "503": {
+            "description": "Service Unavailable",
+            "schema": {
+              "$ref": "#/definitions/app.Response"
+            }
+          }
+        },
+        "security": [
+          {
+            "ApiKeyAuth": []
+          }
+        ],
+        "summary": "Get a ReelShort short drama and its episodes",
+        "tags": [
+          "reelshort"
+        ]
+      }
+    },
+    "/reelshort/new-releases": {
+      "get": {
+        "consumes": [
+          "application/json"
+        ],
+        "description": "Returns ReelShort's (reelshort.com) curated \"New Release\" list from its website's signed JSON API: up to 18 titles with id, name, description, cover, reelshort.com link, episode count, plays, favorites and the first paid episode. book_id is a 24-character title id required by ReelShort's own API; on 2026-10-26 four different values, including an unknown id, returned the same list, so it is not known to change the result. Only public catalogue data is read and no playable media is returned.",
+        "operationId": "reelshort-new-releases",
+        "parameters": [
+          {
+            "description": "A 24-character title id, from reelshort-movie, reelshort-shelf or reelshort-home; required by ReelShort but not observed to change the result",
+            "in": "query",
+            "name": "book_id",
+            "required": true,
+            "type": "string",
+            "x-example": "6aac85383511c0b6df0eec87"
+          },
+          {
+            "description": "Site language, one of en, es, pt, fr, de, it, ja, ko, th, id, tr, ar, ru, pl, ro, cs, bg, vi, zh-TW; defaults to en",
+            "enum": [
+              "en",
+              "es",
+              "pt",
+              "fr",
+              "de",
+              "it",
+              "ja",
+              "ko",
+              "th",
+              "id",
+              "tr",
+              "ar",
+              "ru",
+              "pl",
+              "ro",
+              "cs",
+              "bg",
+              "vi",
+              "zh-TW"
+            ],
+            "in": "query",
+            "name": "language",
+            "type": "string",
+            "x-example": "en"
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/reelshort.newReleasesResponseDoc"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/app.Response"
+            }
+          },
+          "429": {
+            "description": "Too Many Requests",
+            "schema": {
+              "$ref": "#/definitions/app.Response"
+            }
+          },
+          "503": {
+            "description": "Service Unavailable",
+            "schema": {
+              "$ref": "#/definitions/app.Response"
+            }
+          }
+        },
+        "security": [
+          {
+            "ApiKeyAuth": []
+          }
+        ],
+        "summary": "List ReelShort's curated New Release titles",
+        "tags": [
+          "reelshort"
+        ]
+      }
+    },
+    "/reelshort/search": {
+      "get": {
+        "consumes": [
+          "application/json"
+        ],
+        "description": "Searches ReelShort (reelshort.com) short dramas by keyword and returns 12 titles per page: id, title, description, cover, link, episode count, tags, plays and favorites, with the page, page count and an approximate total. The search is fuzzy and the total varies between calls. Only public catalog metadata is read; no playable video is returned.",
+        "operationId": "reelshort-search",
+        "parameters": [
+          {
+            "description": "Title text to search for, up to 100 characters",
+            "in": "query",
+            "name": "keywords",
+            "required": true,
+            "type": "string",
+            "x-example": "billionaire"
+          },
+          {
+            "description": "Page number, 1 to 200; defaults to 1. Each page holds 12 titles",
+            "in": "query",
+            "name": "page",
+            "type": "integer",
+            "x-example": 2
+          },
+          {
+            "description": "Site locale, one of: en, es, pt, fr, de, it, ja, ko, th, id, tr, ar, ru, pl, ro, cs, bg, vi, zh-TW; defaults to en. Titles and tags are translated",
+            "enum": [
+              "en",
+              "es",
+              "pt",
+              "fr",
+              "de",
+              "it",
+              "ja",
+              "ko",
+              "th",
+              "id",
+              "tr",
+              "ar",
+              "ru",
+              "pl",
+              "ro",
+              "cs",
+              "bg",
+              "vi",
+              "zh-TW"
+            ],
+            "in": "query",
+            "name": "language",
+            "type": "string",
+            "x-example": "es"
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/reelshort.searchResponseDoc"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/app.Response"
+            }
+          },
+          "429": {
+            "description": "Too Many Requests",
+            "schema": {
+              "$ref": "#/definitions/app.Response"
+            }
+          },
+          "503": {
+            "description": "Service Unavailable",
+            "schema": {
+              "$ref": "#/definitions/app.Response"
+            }
+          }
+        },
+        "security": [
+          {
+            "ApiKeyAuth": []
+          }
+        ],
+        "summary": "Search ReelShort short dramas by title",
+        "tags": [
+          "reelshort"
+        ]
+      }
+    },
+    "/reelshort/shelf": {
+      "get": {
+        "consumes": [
+          "application/json"
+        ],
+        "description": "Returns one whole ReelShort shelf, such as TOP (up to 200 titles) or New Release: shelf id, name and every title with its id, title, description, cover, link, episode count, tags, plays and favorites. Shelf ids come from reelshort-home. Only public catalog metadata is read; no playable video is returned.",
+        "operationId": "reelshort-shelf",
+        "parameters": [
+          {
+            "description": "Shelf id from reelshort-home (for example 51003506), or a reelshort.com shelf URL",
+            "in": "query",
+            "name": "id",
+            "required": true,
+            "type": "string",
+            "x-example": "51003506"
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/reelshort.shelfResponseDoc"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/app.Response"
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "$ref": "#/definitions/app.Response"
+            }
+          },
+          "429": {
+            "description": "Too Many Requests",
+            "schema": {
+              "$ref": "#/definitions/app.Response"
+            }
+          },
+          "503": {
+            "description": "Service Unavailable",
+            "schema": {
+              "$ref": "#/definitions/app.Response"
+            }
+          }
+        },
+        "security": [
+          {
+            "ApiKeyAuth": []
+          }
+        ],
+        "summary": "Get a whole ReelShort shelf",
+        "tags": [
+          "reelshort"
+        ]
+      }
+    },
+    "/reelshort/tag-books": {
+      "get": {
+        "consumes": [
+          "application/json"
+        ],
+        "description": "Returns a ReelShort (reelshort.com) tag and one page of the titles that carry it: the tag's id, kind and name, its top titles, related tags, and for each title its id, name, description, cover, reelshort.com link, plays and favorites. tag_id is a 24-character tag id from reelshort-tags, reelshort-tag-search or reelshort-movie. Pages hold up to 100 titles and ReelShort lists over a thousand titles for the biggest tags. Only public catalogue data is read and no playable media is returned. An unknown tag returns not found.",
+        "operationId": "reelshort-tag-books",
+        "parameters": [
+          {
+            "description": "Tag id, 24 lowercase hex characters, from reelshort-tags, reelshort-tag-search or reelshort-movie",
+            "in": "query",
+            "name": "tag_id",
+            "required": true,
+            "type": "string",
+            "x-example": "676d210e4582b53a14081aab"
+          },
+          {
+            "description": "Page number, 1 to 10000; defaults to 1",
+            "in": "query",
+            "name": "page",
+            "type": "integer",
+            "x-example": 1
+          },
+          {
+            "description": "Page size, 1 to 100; defaults to 20",
+            "in": "query",
+            "name": "limit",
+            "type": "integer",
+            "x-example": 20
+          },
+          {
+            "description": "Site language, one of en, es, pt, fr, de, it, ja, ko, th, id, tr, ar, ru, pl, ro, cs, bg, vi, zh-TW; defaults to en",
+            "enum": [
+              "en",
+              "es",
+              "pt",
+              "fr",
+              "de",
+              "it",
+              "ja",
+              "ko",
+              "th",
+              "id",
+              "tr",
+              "ar",
+              "ru",
+              "pl",
+              "ro",
+              "cs",
+              "bg",
+              "vi",
+              "zh-TW"
+            ],
+            "in": "query",
+            "name": "language",
+            "type": "string",
+            "x-example": "en"
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/reelshort.tagBooksResponseDoc"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/app.Response"
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "$ref": "#/definitions/app.Response"
+            }
+          },
+          "429": {
+            "description": "Too Many Requests",
+            "schema": {
+              "$ref": "#/definitions/app.Response"
+            }
+          },
+          "503": {
+            "description": "Service Unavailable",
+            "schema": {
+              "$ref": "#/definitions/app.Response"
+            }
+          }
+        },
+        "security": [
+          {
+            "ApiKeyAuth": []
+          }
+        ],
+        "summary": "List the ReelShort titles carrying a tag",
+        "tags": [
+          "reelshort"
+        ]
+      }
+    },
+    "/reelshort/tag-search": {
+      "get": {
+        "consumes": [
+          "application/json"
+        ],
+        "description": "Searches ReelShort's (reelshort.com) tags by text: an actor or actress name, an identity or a trope. Returns one page of up to 50 matches, each with its tag id, name, kind, the number of titles ReelShort's search lists for it and an image. A search with no match returns an empty list. Pass a tag id to reelshort-tag-books for the titles carrying it. Only public catalogue data is read and no playable media is returned.",
+        "operationId": "reelshort-tag-search",
+        "parameters": [
+          {
+            "description": "Tag text to search for, up to 100 characters",
+            "in": "query",
+            "name": "word",
+            "required": true,
+            "type": "string",
+            "x-example": "Billionaire"
+          },
+          {
+            "description": "Page number, 1 to 10000; defaults to 1",
+            "in": "query",
+            "name": "page",
+            "type": "integer",
+            "x-example": 1
+          },
+          {
+            "description": "Site language, one of en, es, pt, fr, de, it, ja, ko, th, id, tr, ar, ru, pl, ro, cs, bg, vi, zh-TW; defaults to en",
+            "enum": [
+              "en",
+              "es",
+              "pt",
+              "fr",
+              "de",
+              "it",
+              "ja",
+              "ko",
+              "th",
+              "id",
+              "tr",
+              "ar",
+              "ru",
+              "pl",
+              "ro",
+              "cs",
+              "bg",
+              "vi",
+              "zh-TW"
+            ],
+            "in": "query",
+            "name": "language",
+            "type": "string",
+            "x-example": "en"
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/reelshort.tagSearchResponseDoc"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/app.Response"
+            }
+          },
+          "429": {
+            "description": "Too Many Requests",
+            "schema": {
+              "$ref": "#/definitions/app.Response"
+            }
+          },
+          "503": {
+            "description": "Service Unavailable",
+            "schema": {
+              "$ref": "#/definitions/app.Response"
+            }
+          }
+        },
+        "security": [
+          {
+            "ApiKeyAuth": []
+          }
+        ],
+        "summary": "Search ReelShort tags by text",
+        "tags": [
+          "reelshort"
+        ]
+      }
+    },
+    "/reelshort/tags": {
+      "get": {
+        "consumes": [
+          "application/json"
+        ],
+        "description": "Returns ReelShort's (reelshort.com) featured tags for one category: actor, actress, identity (Billionaire, CEO, Werewolf...) or trope (Flash Marriage, Revenge...), about 48 per category, each with its tag id, kind and name. Pass a tag id to reelshort-tag-books for the titles carrying it. category is one of actor, actress, identity or trope; language is a site language and defaults to en. Only public catalogue data is read and no playable media is returned.",
+        "operationId": "reelshort-tags",
+        "parameters": [
+          {
+            "description": "Tag category: actor, actress, identity or trope",
+            "enum": [
+              "actor",
+              "actress",
+              "identity",
+              "trope"
+            ],
+            "in": "query",
+            "name": "category",
+            "required": true,
+            "type": "string",
+            "x-example": "identity"
+          },
+          {
+            "description": "Site language, one of en, es, pt, fr, de, it, ja, ko, th, id, tr, ar, ru, pl, ro, cs, bg, vi, zh-TW; defaults to en",
+            "enum": [
+              "en",
+              "es",
+              "pt",
+              "fr",
+              "de",
+              "it",
+              "ja",
+              "ko",
+              "th",
+              "id",
+              "tr",
+              "ar",
+              "ru",
+              "pl",
+              "ro",
+              "cs",
+              "bg",
+              "vi",
+              "zh-TW"
+            ],
+            "in": "query",
+            "name": "language",
+            "type": "string",
+            "x-example": "en"
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/reelshort.tagsResponseDoc"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/app.Response"
+            }
+          },
+          "429": {
+            "description": "Too Many Requests",
+            "schema": {
+              "$ref": "#/definitions/app.Response"
+            }
+          },
+          "503": {
+            "description": "Service Unavailable",
+            "schema": {
+              "$ref": "#/definitions/app.Response"
+            }
+          }
+        },
+        "security": [
+          {
+            "ApiKeyAuth": []
+          }
+        ],
+        "summary": "List ReelShort's featured tags in one category",
+        "tags": [
+          "reelshort"
+        ]
+      }
+    }
+  },
+  "schemes": [
+    "https"
+  ],
+  "securityDefinitions": {
+    "ApiKeyAuth": {
+      "in": "header",
+      "name": "x-api-key",
+      "type": "apiKey"
+    }
+  },
+  "swagger": "2.0",
+  "tags": [
+    {
+      "name": "reelshort"
+    }
+  ]
+}

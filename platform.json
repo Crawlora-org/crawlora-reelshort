@@ -1,4 +1,5 @@
 {
+  "api_path_prefix": "/reelshort/",
   "async_class_name": "AsyncReelShortClient",
   "class_name": "ReelShortClient",
   "contract_revision": "sha256:d05c7c916e44f76874f1d3a98ebf61fce4706f0a7c795a3bc5a64259a6894f4c",
